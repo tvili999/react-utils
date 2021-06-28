@@ -1,0 +1,32 @@
+{
+    "name": "react-utils",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "https://github.com/tvili999/react-utils.git",
+    "author": "Takacs Vili <tvili999@gmail.com>",
+    "license": "MIT",
+    "dependencies": {
+        "react-templates": "https://github.com/tvili999/react-templates",
+        "styled-components": "^5.3.0"
+    },
+    "exports": {
+        "./": "./dist/"
+    },
+    "scripts": {
+        "start": "babel -d dist -w src",
+        "build": "babel -d dist src"
+    },
+    "peerDependencies": {
+        "react": "^17.0.2"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.14.5",
+        "@babel/core": "^7.14.6",
+        "@babel/plugin-proposal-decorators": "^7.14.5",
+        "@babel/plugin-proposal-do-expressions": "^7.14.5",
+        "@babel/plugin-proposal-pipeline-operator": "^7.14.5",
+        "@babel/preset-env": "^7.14.5",
+        "@babel/preset-react": "^7.14.5",
+        "babel-plugin-styled-components": "^1.12.0"
+    }
+}

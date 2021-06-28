@@ -1,0 +1,10 @@
+{
+    "files.exclude": {
+        "**/node_modules": true,
+        "**/dist": true,
+        "**/.babelrc": true,
+        "**/gen.config.json": true,
+        "**/yarn.lock": true,
+        "**/.gitignore": true
+    }
+}
