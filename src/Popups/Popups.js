@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from "react";
 
+import createHoc from "react-utils/utils/createHoc";
+
 const PopupContext = React.createContext();
 
 const { Provider, Consumer } = React.createContext(null);
@@ -46,29 +48,8 @@ class PopupsProvider extends Component {
     );
 }
 
-const withPopups = Component => {
-    const hoc = (props) => (
-        <Consumer>
-            {value => <Component popups={value} {...props} />}
-        </Consumer>
-    );
-
-    hoc.displayName = "withPopups()";
-
-    return hoc;
-};
-
-const withPopup = Component => {
-    const hoc = (props) => (
-        <PopupContext.Consumer>
-            {value => <Component popup={value} {...props} />}
-        </PopupContext.Consumer>
-    );
-
-    hoc.displayName = "withPopup()";
-
-    return hoc;
-};
+const withPopups = createHoc(Consumer, "popups");
+const withPopup = createHoc(PopupContext.Consumer, "popup");
 
 export { PopupsProvider, withPopups, withPopup };
 export const PopupsConsumer = Consumer;
