@@ -1,8 +1,14 @@
 {
-    "files.exclude": {
+    "javascript.validate.enable": false,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "eslint.validate": ["javascript"],
+    "files.excludes": {
         "**/node_modules": true,
         "**/dist": true,
         "**/.babelrc": true,
+        "**/.eslintrc": true,
         "**/gen.config.json": true,
         "**/yarn.lock": true,
         "**/.gitignore": true
