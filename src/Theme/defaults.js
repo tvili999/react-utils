@@ -7,9 +7,6 @@ export default {
     popup: {
         background: "#00000050"
     },
-    group: {
-        background: "#fff"
-    },
     button: {
         background: "#424242",
         color: "#eee",
