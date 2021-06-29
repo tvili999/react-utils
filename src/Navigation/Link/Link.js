@@ -1,34 +1,45 @@
 import React from "react";
 
+import { hoc } from "react-utils/utils";
 import { withNavigation } from "react-utils/Navigation";
 
-const Link = ({ to, children, onClick, navigation, ...props }) => {
-    const handleClick = (e, ...args) => {
-        onClick?.(e, ...args);
-        if(to)
-            navigation.navigate(to);
-    }
+import propTypes from "./Link.props.js";
 
-    const handleClickPreventDefault = (e, ...args) => {
+@hoc(withNavigation)
+class Link extends React.Component {
+    handleClick = (e, ...args) => {
+        this.props.onClick?.(e, ...args);
+        if(this.props.to)
+            this.props.navigation.navigate(this.props.to);
+    };
+
+    handleClickPreventDefault = (e, ...args) => {
         e.preventDefault();
-        handleClick(e, ...args);
+        this.handleClick(e, ...args);
+    };
+
+    render() {
+        // eslint-disable-next-line no-unused-vars
+        const { to, navigation, onClick, children, ...props } = this.props;
+
+        const body = typeof children === "function" ? (
+            children(this.handleClick)
+        ) : (
+            children
+        );
+    
+        return to ? (
+            <a 
+                href={to}
+                onClick={this.handleClickPreventDefault}
+                {...props}
+            >
+                {body}
+            </a>
+        ) : body;
     }
-
-    const body = typeof children === "function" ? (
-        children(handleClick)
-    ) : (
-        children
-    );
-
-    return to ? (
-        <a 
-            href={to}
-            onClick={handleClickPreventDefault}
-            {...props}
-        >
-            {body}
-        </a>
-    ) : body;
 }
 
-export default withNavigation(Link);
+Link.propTypes = propTypes;
+    
+export default Link;

@@ -1,1 +1,8 @@
-export { PopupsProvider, PopupsConsumer, withPopups, PopupConsumer, withPopup } from "./Popups";
+export { 
+    PopupsProvider,
+    PopupsConsumer,
+    withPopups,
+    PopupConsumer,
+    withPopup,
+    PopupContainer 
+} from "./Popups";

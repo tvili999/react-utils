@@ -1,20 +1,29 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
-import createHoc from "react-utils/utils/createHoc";
+import { hoc, createHoc } from "react-utils/utils";
 
+import propTypes from "./Popups.props";
+
+// Current popup object
 const PopupContext = React.createContext();
+
+export const withPopup = createHoc(PopupContext.Consumer, "popup");
+export const PopupConsumer = PopupContext.Consumer;
+
+const PopupContainerPure = ({ popups }) => popups.map(popup => (
+    <PopupContext.Provider value={popup} key={popup.id}>
+        {popup.render()}
+    </PopupContext.Provider>
+));
+
+// Popups API
 
 const { Provider, Consumer } = React.createContext(null);
 
-const PopupContainerPure = ({ popups }) => popups.map((x, i) => (
-    <Fragment key={i}>
-        <PopupContext.Provider value={x}>
-            {x.render()}
-        </PopupContext.Provider>
-    </Fragment>
-))
+export class PopupsProvider extends Component {
+    static propTypes = propTypes;
 
-class PopupsProvider extends Component {
     state = {
         popups: [],
         open: (render) => {
@@ -48,9 +57,21 @@ class PopupsProvider extends Component {
     );
 }
 
-const withPopups = createHoc(Consumer, "popups");
-const withPopup = createHoc(PopupContext.Consumer, "popup");
-
-export { PopupsProvider, withPopups, withPopup };
+export const withPopups = createHoc(Consumer, "popups");
 export const PopupsConsumer = Consumer;
-export const PopupConsumer = PopupContext.Consumer;
+
+// Separate popups container
+
+@hoc(withPopups)
+class PopupContainer extends Component {
+    static propTypes = {
+        popups: PropTypes.object
+    }
+
+    render = () => (
+        <PopupContainerPure popups={this.props.popups}/>
+    )
+}
+
+export { PopupContainer };
+

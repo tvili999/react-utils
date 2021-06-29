@@ -4,18 +4,18 @@ const GlobalStyle = createGlobalStyle`
 body {
     margin: 0;
     background: ${({ backgroundColor }) => backgroundColor};
-    color: ${({ textColor }) => textColor};
+    color: ${({ color }) => color};
     font-family: ${({ font }) => font};
 }
 
 a {
     text-decoration: none;
-    color: ${({ textColor }) => textColor};
+    color: ${({ color }) => color};
 }
 
 p {
     margin: 0;
-    color: ${({ textColor }) => textColor};
+    color: ${({ color }) => color};
 }
 
 * {

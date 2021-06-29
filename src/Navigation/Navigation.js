@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 
+import propTypes from "./Navigation.props";
+
 import createHoc from "react-utils/utils/createHoc";
 
 const { Provider, Consumer } = React.createContext();
 
 class NavigationProvider extends Component {
+    static propTypes = propTypes;
+
     state = {
         interceptors: [],
         listeners: [],
@@ -13,7 +17,7 @@ class NavigationProvider extends Component {
 
             const interceptApi = {
                 retry: () => this.state.navigate(url)
-            }
+            };
 
             for(const interceptor of this.state.interceptors) {
                 const result = interceptor(url, interceptApi);
@@ -30,10 +34,10 @@ class NavigationProvider extends Component {
             }
         },
         addListener: (handler) => {
-            this.setState({ listeners: [...this.state.listeners, handler] })
+            this.setState({ listeners: [...this.state.listeners, handler] });
         },
         removeListener: (handler) => {
-            this.setState({ listeners: this.state.listeners.filter(x => x !== handler) })
+            this.setState({ listeners: this.state.listeners.filter(x => x !== handler) });
         },
         addInterceptor: (handler) => {
             this.setState({ interceptors: [...this.state.interceptors, handler] });
@@ -47,7 +51,7 @@ class NavigationProvider extends Component {
             const remover = () => {
                 this.state.removeInterceptor(handler);
                 this.state.removeListener(handler);
-            }
+            };
             this.state.addListener(remover);
         }
     }
