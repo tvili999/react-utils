@@ -1,2 +1,2 @@
-export { NavigationProvider, NavigationConsumer, withNavigation };
+export { NavigationProvider, NavigationConsumer, withNavigation } from "./Navigation";
 
