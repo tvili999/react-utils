@@ -4,7 +4,7 @@
         "source.fixAll.eslint": true
     },
     "eslint.validate": ["javascript"],
-    "files.excludes": {
+    "files.exclude": {
         "**/node_modules": true,
         "**/dist": true,
         "**/.babelrc": true,
