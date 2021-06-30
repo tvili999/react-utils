@@ -8,21 +8,10 @@ const { Provider, Consumer } = React.createContext();
 class AuthenticationProvider extends Component {
     static propTypes = propTypes;
 
-    // this.props.persist.set(auth);
-    // this.props.persist.get() == auth;
-
-    // this.props.api.refresh(auth);
-    // this.props.api.login(data);
-    // this.props.api.logout(auth);
-
     setAuth = (auth) => {
+        auth = auth || null;
         this.props.persist.set(auth);
-        if(auth == null) {
-            this.setState({ auth: null, loggedIn: false });
-        }
-        else {
-            this.setState({ auth, loggedIn: true });
-        }
+        this.setState({ auth, loggedIn: !!auth, error: null });
     }
 
     state = {
@@ -30,12 +19,12 @@ class AuthenticationProvider extends Component {
         auth: null,
         error: null,
         login: async (data) => {
-            if(this.loggedIn)
+            if(this.state.loggedIn)
                 await this.state.logout();
 
             let auth;
             try {
-                auth = this.props.api.login(data);
+                auth = await Promise.resolve(this.props.api.login(data));
             }
             catch(e) {
                 this.setState({ error: e, loggedIn: false });
@@ -45,9 +34,9 @@ class AuthenticationProvider extends Component {
             this.setAuth(auth);
         },
         logout: async () => {
-            if(!this.loggedIn)
+            if(!this.state.loggedIn)
                 return;
-            await this.props.api?.logout?.(this.state.auth);
+            await Promise.resolve(this.props.api?.logout?.(this.state.auth));
             this.setAuth(null);
         }
     }
