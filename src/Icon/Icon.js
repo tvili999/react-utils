@@ -8,24 +8,25 @@ import { withIcons } from "./Icons";
 import propTypes from "./Icon.props.js";
 
 const SvgWrapper = styled.span`
-    position relative
-    box-sizing border-box
+    position: relative;
+    box-sizing: border-box;
 
-    > svg
-        width 100%
-        height 100%
+    > svg {
+        width: 100%;
+        height: 100%;
+    }
 `;
 
 const ImgWrapper = styled.div`
-    position relative
-    box-sizing border-box
+    position: relative;
+    box-sizing: border-box;
 `;
 
 const ImgIcon = styled.img`
-    position absolute
-    width 100%
-    height 100%
-    object-fit contain
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 `;
 
 @hoc(withIcons)
