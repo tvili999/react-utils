@@ -6,7 +6,9 @@ const FlexRow = styled.div`
     display: flex;
     flex-flow row nowrap;
     box-sizing: border-box;
-    padding: ${({ theme }) => theme.gap};
+    ${({ theme, noFrame }) => (!noFrame) && (
+        `padding: ${theme.gap};`
+    )}
     align-items: ${ props => props.verticalAlign || "center" };
     justify-content: ${ props => props.align || "flex-start" };
 
