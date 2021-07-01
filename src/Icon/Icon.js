@@ -10,6 +10,7 @@ import propTypes from "./Icon.props.js";
 const SvgWrapper = styled.span`
     position: relative;
     box-sizing: border-box;
+    display: block;
 
     > svg {
         width: 100%;
