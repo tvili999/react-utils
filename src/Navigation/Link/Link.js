@@ -9,7 +9,9 @@ import propTypes from "./Link.props.js";
 class Link extends React.Component {
     handleClick = (e, ...args) => {
         this.props.onClick?.(e, ...args);
-        if(this.props.to)
+        if(typeof this.props.to === "function")
+            this.props.to(this.props.navigation);
+        else if(typeof this.props.to === "string")
             this.props.navigation.navigate(this.props.to);
     };
 
@@ -20,17 +22,19 @@ class Link extends React.Component {
 
     render() {
         // eslint-disable-next-line no-unused-vars
-        const { to, navigation, onClick, children, ...props } = this.props;
+        const { to, navigation, children, ...props } = this.props;
 
         const body = typeof children === "function" ? (
             children(this.handleClick)
         ) : (
             children
         );
+
+        const href = typeof to === "string" ? to : "#";
     
         return to ? (
             <a 
-                href={to}
+                href={href}
                 onClick={this.handleClickPreventDefault}
                 {...props}
             >
