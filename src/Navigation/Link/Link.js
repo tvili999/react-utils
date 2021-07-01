@@ -36,6 +36,7 @@ class Link extends React.Component {
             <a 
                 href={href}
                 onClick={this.handleClickPreventDefault}
+                style={{ display: "block" }}
                 {...props}
             >
                 {body}

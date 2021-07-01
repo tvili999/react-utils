@@ -7,10 +7,6 @@ const VerticalLayout = styled.div`
         `margin: ${theme.gap};`
     )}
 
-    > * {
-        display: block;
-    }
-    
     > *:not(:first-child) {
         margin-top: ${({ theme }) => theme.gap};
     }
