@@ -27,7 +27,7 @@
     "scripts": {
         "start": "babel -d dist -w src",
         "build": "babel -d dist src",
-        "install": "npm install && rm -rf dist && babel -d dist src",
+        "prepare": "rm -rf dist && babel -d dist src",
         "test": "jest",
         "test:watch": "jest --watch"
     },
